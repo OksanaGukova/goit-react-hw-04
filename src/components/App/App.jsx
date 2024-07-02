@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import SearchBar from "../SearchBar/SearchBar"
-import { fetchImages } from "./api";
+import { fetchImages } from "../../apiService/apiServise";
 
 
 export default function App() {
