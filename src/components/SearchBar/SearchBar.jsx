@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
+import { FaSearch } from "react-icons/fa";
 
 export default function SearchBar({ onSubmit }) {
   const [query, setQuery] = useState("");
@@ -28,7 +29,11 @@ export default function SearchBar({ onSubmit }) {
     <div className={css.container}>
       <header>
         <form className={css.header} onSubmit={handleFormSubmit}>
-          <input
+          <div className={css.search}>
+             <button type="submit" className={css.searchButton}>
+            <FaSearch />
+            </button>
+            <input
             type="text"
             autoComplete="off"
             autoFocus
@@ -37,9 +42,9 @@ export default function SearchBar({ onSubmit }) {
             onChange={handleChange}
             className={css.input}
           />
-          <button type="submit" className={css.searchButton}>
-            Search
-          </button>
+          </div>
+         
+         
         </form>
         <Toaster position="top-right" />
       </header>

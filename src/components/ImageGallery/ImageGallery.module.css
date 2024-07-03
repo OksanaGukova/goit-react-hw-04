@@ -1,23 +1,23 @@
 .container {
     display: flex;
   flex-wrap: wrap;
-  gap: 16px; /* Відстань між картками */
+  gap: 16px; 
   list-style: none;
   padding: 0;
   margin: 0;
-  justify-content: center; /* Центрування галереї */
+  justify-content: center; 
 }
 .photoContainer{
- width: 300px; /* Фіксована ширина контейнера */
-  height: 200px; /* Фіксована висота контейнера */
-  overflow: hidden; /* Приховати зайві частини зображення */
-  border-radius: 8px; /* Заокруглення кутів контейнера */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тінь для контейнера */
+ width: 300px; 
+  overflow: hidden; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
  
 
 img {
-    width: 100%;
-  height: 100%;
-  object-fit: cover;
+width: 100%;
+    height: 400px;
+    object-fit: cover;
 }
+
