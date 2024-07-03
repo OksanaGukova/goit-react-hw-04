@@ -21,7 +21,7 @@ export default function App() {
       setError(false);
       try {
         const { results, total_pages } = await fetchImages(query, page);
-        setImages((prev) => (page === 1 ? results : [...prev, ...results])); // скидаємо зображення, якщо новий запит
+        setImages((prev) => (page === 1 ? results : [...prev, ...results])); 
         setTotalPages(total_pages);
       } catch (error) {
         setError(true);
@@ -35,8 +35,8 @@ export default function App() {
   const handleSearch = (searchQuery) => {
     if (searchQuery === query) return;
     setQuery(searchQuery);
-    setPage(1); // Скидання сторінки до 1 при новому пошуку
-    setImages([]); // Очистити зображення при новому пошуку
+    setPage(1); 
+    setImages([]);
   };
 
   const handleImageClick = (image) => {

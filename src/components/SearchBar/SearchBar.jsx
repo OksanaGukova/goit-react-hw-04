@@ -1,6 +1,6 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-
+import css from "./SearchBar.module.css";
 
 export default function SearchBar({ onSubmit }) {
   const [query, setQuery] = useState("");
@@ -25,9 +25,9 @@ export default function SearchBar({ onSubmit }) {
   };
 
   return (
-    <>
+    <div className={css.container}>
       <header>
-        <form onSubmit={handleFormSubmit}>
+        <form className={css.header} onSubmit={handleFormSubmit}>
           <input
             type="text"
             autoComplete="off"
@@ -35,11 +35,14 @@ export default function SearchBar({ onSubmit }) {
             placeholder="Search images and photos"
             value={query}
             onChange={handleChange}
+            className={css.input}
           />
-          <button type="submit">Search</button>
+          <button type="submit" className={css.searchButton}>
+            Search
+          </button>
         </form>
         <Toaster position="top-right" />
       </header>
-    </>
+    </div>
   );
 }

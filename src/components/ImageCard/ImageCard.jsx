@@ -1,7 +1,16 @@
-export default function ImmageCard({ url, description, onPhotosClick }) {
+export default function ImageCard({
+  url,
+  description,
+  author,
+  likes,
+  onImageClick,
+}) {
   return (
-    <div>
-      <img src={url} alt={description} onClick={onPhotosClick} />
+    <div onClick={onImageClick}>
+      <img src={url} alt={description} />
+      <p>{description}</p>
+      <p>Author: {author}</p>
+      <p>Likes: {likes}</p>
     </div>
   );
 }
