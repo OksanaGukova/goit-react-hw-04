@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import SearchBar from "../SearchBar/SearchBar"
 import { fetchImages } from "../../apiService/apiServise";
-
+import { Blocks } from "react-loader-spinner";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "../ImageModal/ImageModal";
+import ReactModal from "react-modal";
 
 export default function App() {
   const [images, setImages] = useState([]);
@@ -12,6 +16,8 @@ export default function App() {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  ReactModal.setAppElement("#root");
 
   useEffect(() => {
     if (!query) return;
@@ -43,26 +49,30 @@ export default function App() {
     setSelectedImage(image);
   };
 
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
+    const loadMoreImages = () => {
+      setPage((prevPage) => prevPage + 1);
+    };
+  
+    const closeModal = () => {
+      setSelectedImage(null);
+    };
 
   return (
     <div>
       <SearchBar onSubmit={handleSearch} />
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error fetching images</p>}
+      {error && <ErrorMessage message={error} />}
+      {isLoading && <Blocks />}
+      {error && <p>{error}</p>}
       <ImageGallery photos={images} onPhotosClick={handleImageClick} />
       {totalPages > page && !isLoading && (
-        <button onClick={() => setPage((prevPage) => prevPage + 1)}>
-          Load more
-        </button>
+        <LoadMoreBtn onClick={loadMoreImages} />
       )}
       {selectedImage && (
-        <div className="modal" onClick={closeModal}>
-          <img src={selectedImage.url} alt={selectedImage.description} />
-          <p>{selectedImage.description}</p>
-        </div>
+        <ImageModal
+          isOpen={!!selectedImage}
+          onRequestClose={closeModal}
+          image={selectedImage}
+        />
       )}
     </div>
   );

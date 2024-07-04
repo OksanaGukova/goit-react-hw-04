@@ -9,26 +9,26 @@ export default function ImageGallery({ photos, onPhotosClick }) {
           id,
           urls: { small, regular },
           description,
-          user: { name },
+          user: { name, portfolio_url },
           likes,
         }) => (
           <li className={css.photoContainer} key={id}>
-            <div>
-              <ImageCard
-                url={small}
-                description={description}
-                author={name}
-                likes={likes}
-                onImageClick={() =>
-                  onPhotosClick({
-                    url: regular,
-                    description,
-                    author: name,
-                    likes,
-                  })
-                }
-              />
-            </div>
+            <ImageCard
+              url={small}
+              description={description}
+              author={name}
+              likes={likes}
+              portfolio={portfolio_url}
+              onImageClick={() =>
+                onPhotosClick({
+                  url: regular,
+                  description,
+                  author: name,
+                  likes,
+                  portfolio: portfolio_url,
+                })
+              }
+            />
           </li>
         )
       )}
