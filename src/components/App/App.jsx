@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import SearchBar from "../SearchBar/SearchBar"
 import { fetchImages } from "../../apiService/apiServise";
-import { Blocks } from "react-loader-spinner";
+import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../ImageModal/ImageModal";
 import ReactModal from "react-modal";
+import css from './App.module.css'
 
 export default function App() {
   const [images, setImages] = useState([]);
@@ -16,6 +17,7 @@ export default function App() {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [noResults, setNoResults] = useState(false);
 
   ReactModal.setAppElement("#root");
 
@@ -25,10 +27,15 @@ export default function App() {
     const getImages = async () => {
       setIsLoading(true);
       setError(false);
+       setNoResults(false);
       try {
         const { results, total_pages } = await fetchImages(query, page);
+         if (results.length === 0) {
+           setNoResults(true); 
+         }
         setImages((prev) => (page === 1 ? results : [...prev, ...results])); 
         setTotalPages(total_pages);
+        
       } catch (error) {
         setError(true);
       } finally {
@@ -61,9 +68,10 @@ export default function App() {
     <div>
       <SearchBar onSubmit={handleSearch} />
       {error && <ErrorMessage message={error} />}
-      {isLoading && <Blocks />}
       {error && <p>{error}</p>}
+      {noResults && <p className={css.noResults}>No images found </p>}
       <ImageGallery photos={images} onPhotosClick={handleImageClick} />
+      {isLoading && <Loader />}
       {totalPages > page && !isLoading && (
         <LoadMoreBtn onClick={loadMoreImages} />
       )}

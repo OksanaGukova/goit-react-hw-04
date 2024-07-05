@@ -31,7 +31,7 @@ export default function ImageModal({ isOpen, onRequestClose, image }) {
     >
       <div className={css.content} onClick={handleOverlayClick}>
         <img src={image.url} alt={image.description} className={css.image} />
-        <div className={css.details}>
+        <div>
           <p>{image.description}</p>
           <p>{image.author}</p>
           <p>{image.likes} likes</p>

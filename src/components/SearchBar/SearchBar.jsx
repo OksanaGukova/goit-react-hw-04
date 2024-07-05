@@ -6,7 +6,7 @@ import { FaSearch } from "react-icons/fa";
 export default function SearchBar({ onSubmit }) {
   const [query, setQuery] = useState("");
 
-  const notify = () => toast("Please enter the text for images search");
+  const notify = () => toast("Please enter text for the image search");
 
   const handleChange = (e) => {
     setQuery(e.target.value);
