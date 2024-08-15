@@ -9,4 +9,3 @@ export default function LoadMoreBtn({ onClick }) {
 }
 
 
-{/* <button onClick={() => setPage((prevPage) => prevPage + 1)}>Load more</button>; */}
