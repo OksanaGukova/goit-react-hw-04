@@ -36,6 +36,17 @@ const imagesSlice = createSlice({
     setSelectedImage: (state, action) => {
       state.selectedImage = action.payload;
     },
+    clearImagesState: (state) => {
+      // Додаємо новий екшен для очищення стану зображень
+      state.images = [];
+      state.query = "";
+      state.page = 1;
+      state.totalPages = 0;
+      state.isLoading = false;
+      state.error = null;
+      state.selectedImage = null;
+      state.noResults = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -67,5 +78,6 @@ export const {
   loadMoreImages,
   clearSelectedImage,
   setSelectedImage,
+  clearImagesState,
 } = imagesSlice.actions;
 export default imagesSlice.reducer;

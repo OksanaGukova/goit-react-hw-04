@@ -14,6 +14,7 @@ import {
   setQuery,
   setSelectedImage,
   loadMoreImages as incrementPage,
+  clearImagesState,
 } from "../../redux/imagesSlice";
 import { persistor, store } from "../../redux/store";
 import { PersistGate } from "redux-persist/integration/react";
@@ -37,6 +38,11 @@ export default function App() {
     if (!query) return;
     dispatch(fetchImagesAsync({ query, page }));
   }, [query, page, dispatch]);
+
+  useEffect(() => {
+   
+    dispatch(clearImagesState());
+  }, [dispatch]);
 
   const handleSearch = (searchQuery) => {
     if (searchQuery === query) return;
